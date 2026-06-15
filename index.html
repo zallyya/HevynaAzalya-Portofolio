@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Hevyna Azalya Putri</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .hero-container h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .hero-container p {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            margin-bottom: 5px;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        /* Tabs System */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background-color: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .portfolio-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+
+        .item-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .item-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .item-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .item-link {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #edf2f7;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .item-link:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .tabs {
+                flex-direction: row;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+            .tab-btn {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Portofolio Saya</div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-container">
+            <img src="img/foto.jpg" alt="Hevyna Azalya Putri" class="profile-img">
+            <h1>Hevyna Azalya Putri</h1>
+            <p>11 RPL - Angkatan 2024</p>
+            <p>SMK Negeri 1 Bawang</p>
+        </div>
+    </section>
+
+    <main class="main-container">
+        <h2 class="section-title">Daftar Karya & Proyek</h2>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="filterSelection('all')">Semua Karya</button>
+            <button class="tab-btn" onclick="filterSelection('website')">Website</button>
+            <button class="tab-btn" onclick="filterSelection('3d')">3D</button>
+            <button class="tab-btn" onclick="filterSelection('aplikasi')">Aplikasi</button>
+            <button class="tab-btn" onclick="filterSelection('video')">Video</button>
+            <button class="tab-btn" onclick="filterSelection('grafis')">Grafis</button>
+            <button class="tab-btn" onclick="filterSelection('presentasi')">Presentasi</button>
+            <button class="tab-btn" onclick="filterSelection('poster')">Poster</button>
+            <button class="tab-btn" onclick="filterSelection('dokumen')">PDF Dokumen</button>
+            <button class="tab-btn" onclick="filterSelection('mockup')">Mockup</button>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item website">
+                <div>
+                    <div class="item-category">Website</div>
+                    <div class="item-title">website Kartu Ucapan Ulang Tahun - Romance</div>
+                    <div class="item-date">08 Juni 2026</div>
+                    <div class="item-desc">Situs web ini dirancang khusus untuk membantu Anda merayakan ulang tahun pasangan atau orang terkasih dengan sentuhan romantis yang mendalam.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/website-kartu-ucapan-ulang-tahun-romance-1780900882" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item website">
+                <div>
+                    <div class="item-category">Website</div>
+                    <div class="item-title">Pitch Deck Monitoring PKL - 19719</div>
+                    <div class="item-date">04 Juni 2026</div>
+                    <div class="item-desc">Sebuah solusi berbasis website yang dirancang untuk mempermudah proses pemantauan dan pengelolaan kegiatan PKL.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/pitch-deck-monitoring-pkl-19719-1780549383" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item website">
+                <div>
+                    <div class="item-category">Website</div>
+                    <div class="item-title">Project Website Monitoring PKL-19719</div>
+                    <div class="item-date">04 Juni 2026</div>
+                    <div class="item-desc">Sebuah proyek pengembangan sistem monitoring situs web yang dirancang khusus sebagai bagian dari Praktik Kerja Lapangan.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.smkn1bawang.sch.id/karya/project-website-monitoring-pkl-19719-1780515159" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item website">
+                <div>
+                    <div class="item-category">Website</div>
+                    <div class="item-title">Web Agregator SMK Negeri 1 Bawang 19719</div>
+                    <div class="item-date">13 Mei 2026</div>
+                    <div class="item-desc">Platform digital terpadu yang dirancang khusus untuk menyajikan informasi terkini dan relevan seputar Sekolah Menengah Kejuruan Negeri 1 Bawang.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/web-agregator-smk-negeri-1-bawang-19719-1778633866" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item website">
+                <div>
+                    <div class="item-category">Website</div>
+                    <div class="item-title">Portofolio</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Dokumentasi portofolio digital kumpulan hasil karya pengerjaan proyek sistem dan aplikasi.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/portofolio-1764734968" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item website">
+                <div>
+                    <div class="item-category">Website</div>
+                    <div class="item-title">Konseling BK Website</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Proyek pengembangan website layanan sistem informasi Bimbingan Konseling (BK) sekolah.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/konseling-bk-1764733553" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item website">
+                <div>
+                    <div class="item-category">Website</div>
+                    <div class="item-title">Website Toko Online Toko Ayyaww</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Pembuatan platform website toko online E-Commerce untuk Toko Ayyaww.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/toko-ayyaww-1764731551" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">Project Animasi Among Us 19719</div>
+                    <div class="item-date">06 Juni 2026</div>
+                    <div class="item-desc">Hadirkan ketegangan dan keceriaan dari game populer Among Us ke dalam proyek Anda dengan animasi 3D yang memukau ini. Dibuat dengan detail presisi.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/project-animasi-among-us-19719-1780759794" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">3D Kaktus 19719 - Blender 3D</div>
+                    <div class="item-date">06 Juni 2026</div>
+                    <div class="item-desc">Menampilkan model tiga dimensi dari kaktus yang detail dan realistis, dirancang untuk memperkaya berbagai lingkungan digital.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/3d-kaktus-19719-blender-3d-1780690086" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">Pose Among Us 3D Menendang Bola</div>
+                    <div class="item-date">30 Mei 2026</div>
+                    <div class="item-desc">Karya seni 3D ini dengan apik menangkap esensi karakter ikonik dari game fenomena Among Us, menampilkan crewmate dalam pose dinamis menendang bola.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/pose-among-us-3d-menendang-bola-1780119930" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">Model Printer Foto Copy 3D 19719</div>
+                    <div class="item-date">22 Mei 2026</div>
+                    <div class="item-desc">Merepresentasikan sebuah inovasi teknologi futuristik yang membayangkan sebuah perangkat canggih dari tahun 1971.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/model-printer-foto-copy-3d-19719-1779438470" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">Meja Belajar Panjang Merah 3D 19719</div>
+                    <div class="item-date">22 Mei 2026</div>
+                    <div class="item-desc">Model 3D Meja Belajar Panjang ini dirancang dengan detail tinggi dan estetika modern, menjadikannya aset visual yang kuat untuk berbagai proyek desain.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/meja-belajar-panjang-merah-3d-19719-1779434299" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">Karakter Among Us 3D - v1</div>
+                    <div class="item-date">21 Mei 2026</div>
+                    <div class="item-desc">Membawa karakter ikonik ke ruang tiga dimensi. Memperkenalkan Among Us 3D-v1. Detail visor, pencahayaan, dan siluetnya dibuat lebih hidup.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/karakter-among-us-3d-v1-1779345110" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">3D Lampu Meja - Untuk Belajar</div>
+                    <div class="item-date">21 Mei 2026</div>
+                    <div class="item-desc">Bikin meja belajar kamu makin estetik sekaligus nyaman buat dipakai begadang semalaman! Desain lampu meja 3D dengan pencahayaan yang pas di mata.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/3d-lampu-meja-untuk-belajar-1779341311" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item 3d">
+                <div>
+                    <div class="item-category">3D</div>
+                    <div class="item-title">Soffaa</div>
+                    <div class="item-date">22 Januari 2026</div>
+                    <div class="item-desc">Proyek pemodelan aset 3D berupa objek furniture Sofa menggunakan software pemodelan 3D.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/soffaa-1769060672" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item aplikasi">
+                <div>
+                    <div class="item-category">Aplikasi</div>
+                    <div class="item-title">Aplikasi Penjualan Buku - Android Studio</div>
+                    <div class="item-date">06 Juni 2026</div>
+                    <div class="item-desc">Aplikasi Penjualan Buku berbasis Android yang dikembangkan menggunakan Android Studio sebagai solusi digital komprehensif untuk pengelolaan buku.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/aplikasi-penjualan-buku-android-studio-1780686540" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item aplikasi">
+                <div>
+                    <div class="item-category">Aplikasi</div>
+                    <div class="item-title">Aplikasi Water Reminder - Android Studio</div>
+                    <div class="item-date">06 Juni 2026</div>
+                    <div class="item-desc">Memperkenalkan Aplikasi Water Reminder, sebuah solusi inovatif yang dikembangkan untuk mengatasi tantangan dalam menjaga hidrasi tubuh harian.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/aplikasi-water-reminder-android-studio-1780686463" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item aplikasi">
+                <div>
+                    <div class="item-category">Aplikasi</div>
+                    <div class="item-title">Aplikasi Flappy Bird - Android Studio 19719</div>
+                    <div class="item-date">06 Juni 2026</div>
+                    <div class="item-desc">Implementasi modern dari game mobile klasik yang ikonik, Flappy Bird, dikembangkan secara native menggunakan Android Studio.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/aplikasi-flappy-bird-android-studio-19719-1780686370" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item video">
+                <div>
+                    <div class="item-category">Video</div>
+                    <div class="item-title">Tutorial Menggunakan Website Monitoring PKL - Project Akhir</div>
+                    <div class="item-date">04 Juni 2026</div>
+                    <div class="item-desc">Video tutorial komprehensif panduan operasional penggunaan sistem monitoring PKL yang telah dikembangkan sebagai sistem akhir.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/tutorial-menggunakan-website-monitoring-pkl-project-akhir-1780514981" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item video">
+                <div>
+                    <div class="item-category">Video</div>
+                    <div class="item-title">Film Pendek Bahasa Indonesia - Bahagia? (Kelompok)</div>
+                    <div class="item-date">04 Juni 2026</div>
+                    <div class="item-desc">Menyelami inti pertanyaan abadi yang kerap menghantui setiap insan, film pendek berjudul 'Bahagia?' menyajikan sebuah refleksi mendalam.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/film-pendek-bahasa-indonesia-bahagia-1780510139" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item video">
+                <div>
+                    <div class="item-category">Video</div>
+                    <div class="item-title">Opening Video Drama Bahasa Indonesia</div>
+                    <div class="item-date">30 Mei 2026</div>
+                    <div class="item-desc">Video pembuka khusus untuk produksi drama berbahasa Indonesia, berfungsi sebagai gerbang visual utama yang memperkenalkan audiens pada pementasan.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/opening-video-drama-bahasa-indonesia-1780120133" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item video">
+                <div>
+                    <div class="item-category">Video</div>
+                    <div class="item-title">Film Pendek - Ramadhan Cahaya</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Mengisahkan seorang tokoh utama yang bingung memilih bacaan hingga menemukan buku berjudul 'Jangan Takut Gagal' yang mengubah perspektifnya.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/film-pendek-ramadhan-cahaya-1764738223" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Logo Kuliner - Warung Dapure Biyunge</div>
+                    <div class="item-date">21 Mei 2026</div>
+                    <div class="item-desc">Desain logo identitas resmi Warung Dapure Biyunge. Desain yang merepresentasikan cita rasa kehangatan masakan seorang ibu.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/logo-kuliner-warung-dapure-biyunge-1779340738" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Logo</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Proyek pembuatan desain aset identitas visual berupa logo kreatif.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/logo-1764740903" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Cover Sorotan Instagram</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Desain cover highlight/sorotan untuk estetika profil media sosial Instagram.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/cover-sorotan-instagran-1764736237" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Feed Instagram</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Perancangan tata letak konten visual kreatif microblog/feed media sosial Instagram.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/feed-instagram-1764735831" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Desain ID Card</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Pembuatan mockup identitas kartu pengenal resmi (ID Card) dengan gaya formal.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/desain-id-card-1764735400" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Banner Digital</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Desain media promosi dan publikasi digital dalam bentuk spanduk/banner web.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/banner-digital-1764734558" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Cover Jurnal Canva</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Penyusunan desain halaman muka (cover) jurnal ilmiah/pembelajaran menggunakan tools Canva.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/cover-jurnal-1764732025" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item grafis">
+                <div>
+                    <div class="item-category">Grafis</div>
+                    <div class="item-title">Feed Instagram (Variasi 2)</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Proyek desain aset grafis digital optimasi layout microblog Feed Instagram.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/feed-instagram-1764730948" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item presentasi">
+                <div>
+                    <div class="item-category">Presentasi</div>
+                    <div class="item-title">Card Identitas dalam Bahasa Jepang</div>
+                    <div class="item-date">20 Mei 2026</div>
+                    <div class="item-desc">"Perkenalan adalah langkah awal menuju mimpi yang lebih besar." Media presentasi dan kartu identitas pengenalan diri dengan struktur bahasa Jepang.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/card-identitas-dalam-bahasa-jepang-1779258295" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item presentasi">
+                <div>
+                    <div class="item-category">Presentasi</div>
+                    <div class="item-title">Laporan PKL KWU</div>
+                    <div class="item-date">05 Mei 2026</div>
+                    <div class="item-desc">Laporan Praktik Kerja Lapangan (PKL) Kewirausahaan (KWU) menyajikan tinjauan komprehensif terhadap pengalaman dan pembelajaran.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/laporan-pkl-kwu-1777958183" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item presentasi">
+                <div>
+                    <div class="item-category">Presentasi</div>
+                    <div class="item-title">Laporan PKL Kwu 11 RPL</div>
+                    <div class="item-date">05 Februari 2026</div>
+                    <div class="item-desc">Dokumen pelaporan hasil kegiatan program Praktik Kerja Lapangan bidang Kewirausahaan kelas 11 jurusan RPL.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/laporan-pkl-kwu-1770304891" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item presentasi">
+                <div>
+                    <div class="item-category">Presentasi</div>
+                    <div class="item-title">Jurnal Visual</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Penyusunan modul presentasi kreatif berbasis infografis jurnal visual pembelajaran.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/junal-visual-1764738993" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item poster">
+                <div>
+                    <div class="item-category">Poster</div>
+                    <div class="item-title">Hidup Berkah Dengan Al Quran</div>
+                    <div class="item-date">20 Mei 2026</div>
+                    <div class="item-desc">"Al-Qur'an bukan sekadar bacaan, tetapi pedoman hidup yang menuntun hati menuju keberkahan." Poster media syiar digital.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/hidup-berkah-dengan-al-quran-1779257881" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item poster">
+                <div>
+                    <div class="item-category">Poster</div>
+                    <div class="item-title">Thumbnail Tugas Drama Bahasa Indonesia</div>
+                    <div class="item-date">20 Mei 2026</div>
+                    <div class="item-desc">COMING SOON! [Bahagia] - Sebuah Mahakarya Kelas [XI RPL] "Setiap topeng punya cerita, setiap peran punya rahasia." Sesuatu yang besar sedang bersiap dihadirkan.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/thumbnail-tugas-drama-bahasa-indonesia-1779252592" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item poster">
+                <div>
+                    <div class="item-category">Poster</div>
+                    <div class="item-title">Infografis Kearifan Lokal Canva</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Desain publikasi poster infografis bertemakan edukasi kebudayaan dan kearifan lokal.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/infografis-kearifal-lokal-1764736765" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item poster">
+                <div>
+                    <div class="item-category">Poster</div>
+                    <div class="item-title">Poster Sertijab Canva</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Desain cetak poster media informasi kegiatan Serah Terima Jabatan (Sertijab) organisasi sekolah.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/poster-sertijab-1764736630" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item poster">
+                <div>
+                    <div class="item-category">Poster</div>
+                    <div class="item-title">Poster Lisamatong</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Poster kampanye kebersihan lingkungan sekolah gerakan: Lihat Sampah Masukkan Tong (Lisamatong).</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/poster-lisamatong-1764735146" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item dokumen">
+                <div>
+                    <div class="item-category">PDF Dokumen</div>
+                    <div class="item-title">Saat Aku Memilihmu - Cerpen</div>
+                    <div class="item-date">20 Mei 2026</div>
+                    <div class="item-desc">"Kadang, penolakan bukan akhir dari mimpi - melainkan awal menemukan jalan yang sebenarnya." Karya sastra cerpen fiksi kreatif.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/saat-aku-memilihmu-cerpen-1779257466" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item dokumen">
+                <div>
+                    <div class="item-category">PDF Dokumen</div>
+                    <div class="item-title">Visual Alchemy: Mengubah Piksel Menjadi Produk Bernilai Jual</div>
+                    <div class="item-date">18 Mei 2026</div>
+                    <div class="item-desc">Panduan komprehensif dalam format PDF dokumen yang mengungkap seni, strategi, dan ilmu di balik industri pengolahan aset digital bernilai komersial.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/visual-alchemy-mengubah-piksel-menjadi-produk-bernilai-jua-1779084719" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item mockup">
+                <div>
+                    <div class="item-category">Mockup</div>
+                    <div class="item-title">Go - Click</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Perancangan UI/UX Mockup sistem prototipe untuk aplikasi pemesanan makanan serta ojek online.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/go-click-1764734311" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+
+            <div class="portfolio-item mockup">
+                <div>
+                    <div class="item-category">Mockup</div>
+                    <div class="item-title">Tiket Serulingmas Figma</div>
+                    <div class="item-date">03 Desember 2025</div>
+                    <div class="item-desc">Desain antarmuka pemesanan tiket digital objek wisata Serulingmas berbasis aplikasi Figma.</div>
+                </div>
+                <a href="https://karya.pplg.smkn1bawang.sch.id/karya/tiket-serulingmas-1764734019" target="_blank" class="item-link">Lihat Karya</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hevyna Azalya Putri. All Rights Reserved.</p>
+        <p>11 RPL - SMK Negeri 1 Bawang</p>
+    </footer>
+
+    <script>
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("portfolio-item");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+                if (x[i].className.indexOf(c) > -1) {
+                    x[i].style.display = "flex";
+                }
+            }
+            
+            // Mengatur status aktif tombol tab
+            var btns = document.getElementsByClassName("tab-btn");
+            for (var j = 0; j < btns.length; j++) {
+                btns[j].classList.remove("active");
+                if(btns[j].setAttribute('onclick') !== null && btns[j].getAttribute('onclick').includes(c === "" ? "all" : c)){
+                     btns[j].classList.add("active");
+                }
+            }
+        }
+        
+        // Menambahkan listener class active pada tab yang di-klik secara langsung
+        var btnContainer = document.querySelector(".tabs");
+        var btns = btnContainer.getElementsByClassName("tab-btn");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function(){
+            var current = btnContainer.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+          });
+        }
+
+        // Tampilkan semua secara default saat pertama kali dimuat
+        filterSelection("all");
+    </script>
+</body>
+</html>

@@ -3,721 +3,434 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Profesional | Hevyna Azalya Putri</title>
+    <title>Portofolio | Hevyna Azalya Putri</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        :root {
-            --primary-color: #1a365d;
-            --secondary-color: #2b6cb0;
-            --text-dark: #2d3748;
-            --text-light: #718096;
-            --bg-light: #f7fafc;
-            --white: #ffffff;
-            --border-color: #e2e8f0;
-            --danger-color: #e53e3e;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
-            color: var(--white);
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .hero-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--white);
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .hero-container h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .hero-container p {
-            font-size: 1.1rem;
-            color: #e2e8f0;
-            margin-bottom: 5px;
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary-color);
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background-color: var(--secondary-color);
-        }
-
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-            border-color: var(--primary-color);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
-        .portfolio-item {
-            background-color: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            transition: transform 0.2s ease;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-        }
-
-        .thumbnail-container {
-            width: 100%;
-            height: 180px;
-            background-color: #edf2f7;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .thumbnail-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Tombol Aksi Admin di Atas Thumbnail */
-        .admin-actions {
-            display: none; /* Hanya muncul di mode admin */
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 10;
-        }
-
-        .admin-action-btn {
-            background-color: rgba(26, 54, 93, 0.9);
-            color: var(--white);
-            border: none;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .admin-action-btn.delete {
-            background-color: rgba(229, 62, 98, 0.9);
-        }
-
-        .admin-action-btn:hover {
-            opacity: 0.9;
-        }
-
-        .item-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .item-category {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--secondary-color);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-
-        .item-title {
-            font-size: 1.15rem;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .item-date {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-bottom: 12px;
-        }
-
-        .item-desc {
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
-        .item-link {
-            display: inline-block;
-            padding: 8px 12px;
-            background-color: #edf2f7;
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-align: center;
-            transition: background-color 0.2s ease;
-        }
-
-        .item-link:hover {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        /* Admin Section Area */
-        #admin-panel {
-            display: none;
-            margin-top: 50px;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-.admin-actions {
-    display: none !important; 
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 10;
-}
-
-        .management-section {
-            background-color: var(--white);
-            border: 2px dashed var(--secondary-color);
-            border-radius: 8px;
-            padding: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .form-toggle-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .form-toggle-btn {
-            padding: 8px 16px;
-            background-color: #edf2f7;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .form-toggle-btn.active {
-            background-color: var(--secondary-color);
-            color: var(--white);
-        }
-
-        .input-form {
-            display: none;
-        }
-
-        .input-form.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 0.95rem;
-        }
-
-        .submit-btn {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.95rem;
-            width: 100%;
-        }
-
-        footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-            font-size: 0.9rem;
-        }
-
-        .secret-trigger {
-            cursor: pointer;
-            user-select: none;
-        }
-
-        @media (max-width: 768px) {
-            .tabs {
-                flex-direction: row;
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding-bottom: 10px;
-            }
-            .tab-btn {
-                white-space: nowrap;
-            }
-        }
+        .filter-btn.active { background-color: #1e3a8a; color: white; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans">
 
-    <!-- Input file tersembunyi global untuk menampung perubahan thumbnail -->
-    <input type="file" id="global-thumb-loader" accept="image/*" style="display:none;">
-
-    <header>
-        <div class="nav-container">
-            <div class="logo">Portofolio Saya</div>
+    <!-- HERO SECTION / HEADER -->
+    <header class="bg-white border-b border-slate-200 py-16 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Ganti src di bawah ini dengan foto profil kamu, misal: img/profil.jpg -->
+            <img src="img/foto.jpg" alt="Hevyna Azalya Putri" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-900 shadow-md mb-4">
+            <h1 class="text-3xl font-bold text-slate-900 tracking-tight">HEVYNA AZALYA PUTRI</h1>
+            <p class="text-blue-900 font-medium mt-1">11 RPL - Angkatan 2024</p>
+            <p class="text-slate-500 text-sm mt-2 max-w-xl mx-auto">Selamat datang di portofolio resmi saya. Halaman ini mendokumentasikan berbagai karya dan proyek yang telah saya selesaikan di bidang Rekayasa Perangkat Lunak.</p>
         </div>
     </header>
 
-    <section class="hero-section">
-        <div class="hero-container">
-            <img src="img/foto.jpg" alt="Hevyna Azalya Putri" class="profile-img">
-            <h1>Hevyna Azalya Putri</h1>
-            <p>11 RPL - Angkatan 2024</p>
-            <p>SMK Negeri 1 Bawang</p>
-        </div>
-    </section>
-
-    <main class="main-container">
-        <h2 class="section-title">Daftar Karya & Proyek</h2>
+    <!-- PORTFOLIO UTAMA -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Filter Kategori (Otomatis Muncul Berdasarkan Data) -->
+        <div class="flex flex-wrap justify-center gap-2 mb-10" id="category-filters"></div>
         
-        <div class="tabs" id="tabs-container">
-            <button class="tab-btn active" onclick="filterSelection('all')">Semua Karya</button>
-            <button class="tab-btn" onclick="filterSelection('website')">Website</button>
-            <button class="tab-btn" onclick="filterSelection('3d')">3D</button>
-            <button class="tab-btn" onclick="filterSelection('aplikasi')">Aplikasi</button>
-            <button class="tab-btn" onclick="filterSelection('video')">Video</button>
-            <button class="tab-btn" onclick="filterSelection('grafis')">Grafis</button>
-            <button class="tab-btn" onclick="filterSelection('presentasi')">Presentasi</button>
-            <button class="tab-btn" onclick="filterSelection('poster')">Poster</button>
-            <button class="tab-btn" onclick="filterSelection('dokumen')">PDF Dokumen</button>
-            <button class="tab-btn" onclick="filterSelection('mockup')">Mockup</button>
-        </div>
-
-        <div class="portfolio-grid" id="portfolio-display">
-            <!-- Render otomatis melalui JavaScript -->
-        </div>
-
-        <!-- PANEL ADMIN (TERSEMBUNYI) -->
-        <div id="admin-panel">
-            <h2 class="section-title">Panel Admin: Kelola Portofolio</h2>
-            <div class="management-section">
-                <div class="form-toggle-buttons">
-                    <button class="form-toggle-btn active" onclick="switchForm(1)">Form 1 (Dengan Link)</button>
-                    <button class="form-toggle-btn" onclick="switchForm(2)">Form 2 (Tanpa Link)</button>
-                </div>
-
-                <!-- FORM 1 -->
-                <form id="form1" class="input-form active" onsubmit="handleFormSubmit(event, 1)">
-                    <div class="form-group">
-                        <label>Kategori Proyek</label>
-                        <select class="prod-category" required>
-                            <option value="website">Website</option>
-                            <option value="3d">3D</option>
-                            <option value="aplikasi">Aplikasi</option>
-                            <option value="video">Video</option>
-                            <option value="grafis">Grafis</option>
-                            <option value="presentasi">Presentasi</option>
-                            <option value="poster">Poster</option>
-                            <option value="dokumen">PDF Dokumen</option>
-                            <option value="mockup">Mockup</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Judul Proyek</label>
-                        <input type="text" class="prod-title" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tanggal Rilis</label>
-                        <input type="text" class="prod-date" placeholder="Contoh: 08 Jun 2026" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Deskripsi Proyek</label>
-                        <textarea class="prod-desc" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Link Karya</label>
-                        <input type="url" class="prod-link" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Foto Thumbnail</label>
-                        <input type="file" class="prod-thumb" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Simpan ke Portofolio (Form 1)</button>
-                </form>
-
-                <!-- FORM 2 -->
-                <form id="form2" class="input-form" onsubmit="handleFormSubmit(event, 2)">
-                    <div class="form-group">
-                        <label>Kategori Proyek</label>
-                        <select class="prod-category" required>
-                            <option value="website">Website</option>
-                            <option value="3d">3D</option>
-                            <option value="aplikasi">Aplikasi</option>
-                            <option value="video">Video</option>
-                            <option value="grafis">Grafis</option>
-                            <option value="presentasi">Presentasi</option>
-                            <option value="poster">Poster</option>
-                            <option value="dokumen">PDF Dokumen</option>
-                            <option value="mockup">Mockup</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Judul Proyek</label>
-                        <input type="text" class="prod-title" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tanggal Rilis</label>
-                        <input type="text" class="prod-date" placeholder="Contoh: 03 Dec 2025" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Deskripsi Proyek</label>
-                        <textarea class="prod-desc" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Foto Thumbnail</label>
-                        <input type="file" class="prod-thumb" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Simpan ke Portofolio (Form 2)</button>
-                </form>
-            </div>
-        </div>
+        <!-- Grid Tempat Kartu Karya Muncul -->
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
 
-    <footer>
-        <p class="secret-trigger" onclick="checkAdminClick()">&copy; 2026 Hevyna Azalya Putri. All Rights Reserved.</p>
-        <p style="font-size: 0.75rem; color:#4a5568; margin-top:5px;">11 RPL - SMK Negeri 1 Bawang</p>
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400 mt-20">
+        &copy; 2026 Hevyna Azalya Putri. All Rights Reserved.
     </footer>
 
     <script>
-        // DATA LENGKAP 34 KARYA DARI PDF[cite: 1]
-        const defaultProjects = [
-            // --- WEBSITE ---[cite: 1]
-            { category: 'website', title: 'website Kartu Ucapan Ulang Tahun - Romance', date: '08 Jun 2026', desc: 'Situs web ini dirancang khusus untuk membantu Anda merayakan ulang tahun pasangan atau orang terkasih dengan sentuhan romantis.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/website-kartu-ucapan-ulang-tahun-romance-1780900882', thumb: '' },
-            { category: 'website', title: 'Pitch Deck Monitoring PKL - 19719', date: '04 Jun 2026', desc: 'Sebuah solusi berbasis website yang dirancang untuk mempermudah proses pemantauan dan pengelolaan kegiatan PKL.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/pitch-deck-monitoring-pkl-19719-1780549383', thumb: '' },
-            { category: 'website', title: 'Project Website Monitoring PKL - 19719', date: '04 Jun 2026', desc: 'Karya \'Website Monitoring PKL - 19719\' adalah sebuah proyek pengembangan sistem monitoring situs web yang dirancang khusus.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/project-website-monitoring-pkl-19719-1780515159', thumb: '' },
-            { category: 'website', title: 'Web Agregator SMK Negeri 1 Bawang 19719', date: '13 May 2026', desc: 'Web Agregator SMKN 1 Bawang merupakan platform digital terpadu yang dirancang khusus untuk menyajikan informasi terkini.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/web-agregator-smk-negeri-1-bawang-19719-1778633866', thumb: '' },
-            { category: 'website', title: 'Portofolio Digital', date: '03 Dec 2025', desc: 'Dokumentasi portofolio kumpulan hasil pengerjaan proyek sistem.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/portofolio-1764734968', thumb: '' },
-            { category: 'website', title: 'Konseling BK Website', date: '03 Dec 2025', desc: 'Layanan sistem informasi Bimbingan Konseling (BK) berbasis web.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/konseling-bk-1764733553', thumb: '' },
-            { category: 'website', title: 'Toko Ayyaww Website Toko Online', date: '03 Dec 2025', desc: 'Website Toko Online platform e-commerce retail untuk Toko Ayyaww.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/toko-ayyaww-1764731551', thumb: '' },
-
-            // --- 3D MODELLING ---[cite: 1]
-            { category: '3d', title: 'Project Animasi Among Us - 19719', date: '06 Jun 2026', desc: 'Hadirkan ketegangan dan keceriaan dari game populer Among Us ke dalam proyek Anda dengan animasi 3D yang memukau.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/project-animasi-among-us-19719-1780759794', thumb: '' },
-            { category: '3d', title: '3D Kaktus 19719 - Blender 3D', date: '06 Jun 2026', desc: 'Menampilkan model tiga dimensi dari kaktus yang detail dan realistis.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/3d-kaktus-19719-blender-3d-1780690086', thumb: '' },
-            { category: '3d', title: 'Pose Among Us 3D Menendang Bola', date: '30 May 2026', desc: 'Menampilkan crewmate atau impostor mungil dalam pose dinamis sedang menendang bola.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/pose-among-us-3d-menendang-bola-1780119930', thumb: '' },
-            { category: '3d', title: 'Model Printer Foto Copy 3D 19719', date: '22 May 2026', desc: 'Merepresentasikan sebuah inovasi teknologi futuristik perangkat mesin foto copy.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/model-printer-foto-copy-3d-19719-1779438470', thumb: '' },
-            { category: '3d', title: 'Meja Belajar Panjang Merah 3D 19719', date: '22 May 2026', desc: 'Model 3D Meja Belajar Panjang dirancang dengan detail tinggi dan estetika modern.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/meja-belajar-panjang-merah-3d-19719-1779434299', thumb: '' },
-            { category: '3d', title: 'Karakter Among Us 3D - v1', date: '21 May 2026', desc: 'Membawa karakter ikonik ke ruang tiga dimensi dengan detail visor dan pencahayaan hidup.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/karakter-among-us-3d-v1-1779345110', thumb: '' },
-            { category: '3d', title: '3D Lampu Meja - Untuk Belajar', date: '21 May 2026', desc: 'Bikin meja belajar kamu makin estetik sekaligus nyaman dengan cahaya yang pas di mata.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/3d-lampu-meja-untuk-belajar-1779341311', thumb: '' },
-            { category: '3d', title: 'Soffaa', date: '22 Jan 2026', desc: 'Pemodelan objek 3D aset furnitur sofa interior realistis.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/soffaa-1769060672', thumb: '' },
-
-            // --- APLIKASI ---[cite: 1]
-            { category: 'aplikasi', title: 'Aplikasi Penjualan Buku - Android Studio', date: '06 Jun 2026', desc: 'Aplikasi Android komprehensif yang dirancang untuk mengelola penjualan buku secara digital.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/aplikasi-penjualan-buku-android-studio-1780686540', thumb: '' },
-            { category: 'aplikasi', title: 'Aplikasi Water Reminder - Android Studio', date: '06 Jun 2026', desc: 'Solusi inovatif untuk membantu menjaga hidrasi tubuh dengan pengingat minum air harian.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/aplikasi-water-reminder-android-studio-1780686463', thumb: '' },
-            { category: 'aplikasi', title: 'Aplikasi Flappy Bird - Android Studio 19719', date: '06 Jun 2026', desc: 'Implementasi modern dari game mobile klasik yang ikonik dikembangkan secara native.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/aplikasi-flappy-bird-android-studio-19719-1780686370', thumb: '' },
-
-            // --- VIDEO ---[cite: 1]
-            { category: 'video', title: 'Tutorial Menggunakan Website Monitoring PKL', date: '04 Jun 2026', desc: 'Video tutorial panduan komprehensif penggunaan sistem akhir website monitoring PKL.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/tutorial-menggunakan-website-monitoring-pkl-project-akhir-1780514981', thumb: '' },
-            { category: 'video', title: 'Film Pendek Bahasa Indonesia - Bahagia? (Kelompok)', date: '04 Jun 2026', desc: 'Film pendek yang menyajikan sebuah refleksi mendalam mengenai arti kebahagiaan.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/film-pendek-bahagia-1780510139', thumb: '' },
-            { category: 'video', title: 'Opening Video Drama Bahasa Indonesia', date: '30 May 2026', desc: 'Video pembuka visual bumper dramatis untuk pementasan tugas drama Bahasa Indonesia.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/opening-video-drama-bahasa-indonesia-1780120133', thumb: '' },
-            { category: 'video', title: 'Film Pendek - Ramadhan Cahaya', date: '03 Dec 2025', desc: 'Kisah inspiratif tokoh utama menemukan buku motivasi Jangan Takut Gagal.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/film-pendek-ramadhan-cahaya-1764738223', thumb: '' },
-
-            // --- GRAFIS ---[cite: 1]
-            { category: 'grafis', title: 'Logo Kuliner - Warung Dapure Biyunge', date: '21 May 2026', desc: 'Satu Logo, Sejuta Rasa Masakan Ibu. Desain identitas visual resmi warung kuliner.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/logo-kuliner-warung-dapure-biyunge-1779340738', thumb: '' },
-            { category: 'grafis', title: 'Logo Kreatif', date: '03 Dec 2025', desc: 'Aset identitas grafis desain logo konseptual.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/logo-1764740903', thumb: '' },
-            { category: 'grafis', title: 'Cover Sorotan Instagram', date: '03 Dec 2025', desc: 'Desain cover highlight untuk optimalisasi keindahan profil sosial media.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/cover-sorotan-instagran-1764736237', thumb: '' },
-            { category: 'grafis', title: 'Feed Instagram Layout', date: '03 Dec 2025', desc: 'Perancangan desain microblog feed untuk estetika grid Instagram.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/feed-instagram-1764735831', thumb: '' },
-            { category: 'grafis', title: 'Desain ID Card', date: '03 Dec 2025', desc: 'Perancangan layout cetak kartu tanda pengenal (ID Card).', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/desain-id-card-1764735400', thumb: '' },
-            { category: 'grafis', title: 'Banner Digital', date: '03 Dec 2025', desc: 'Desain spanduk web publikasi digital.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/banner-digital-1764734558', thumb: '' },
-            { category: 'grafis', title: 'Cover Jurnal Canva', date: '03 Dec 2025', desc: 'Desain sampul depan dokumen jurnal akademis via Canva.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/cover-jurnal-1764732025', thumb: '' },
-            { category: 'grafis', title: 'Feed Instagram V2', date: '03 Dec 2025', desc: 'Variasi desain aset konten promosi grid media sosial.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/feed-instagram-1764730948', thumb: '' },
-
-            // --- PRESENTASI ---[cite: 1]
-            { category: 'presentasi', title: 'Card Identitas dalam Bahasa Jepang', date: '20 May 2026', desc: 'Media presentasi perkenalan diri terstruktur menggunakan tata bahasa Jepang.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/card-identitas-dalam-bahasa-jepang-1779258295', thumb: '' },
-            { category: 'presentasi', title: 'Laporan PKL KWU', date: '05 May 2026', desc: 'Penyusunan laporan komprehensif tinjauan hasil PKL Kewirausahaan.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/laporan-pkl-kwu-1777958183', thumb: '' },
-            { category: 'presentasi', title: 'Laporan PKL Kwu 11 RPL', date: '05 Feb 2026', desc: 'Dokumen presentasi akuntabilitas program praktik kerja lapangan.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/laporan-pkl-kwu-1770304891', thumb: '' },
-            { category: 'presentasi', title: 'Jurnal Visual', date: '03 Dec 2025', desc: 'Penyusunan presentasi berbasis visual rangkuman materi.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/junal-visual-1764738993', thumb: '' },
-
-            // --- POSTER ---[cite: 1]
-            { category: 'poster', title: 'Hidup Berkah Dengan Al Quran', date: '20 May 2026', desc: 'Poster syiar edukasi religi sebagai cahaya penuntun hidup.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/hidup-berkah-dengan-al-quran-1779257881', thumb: '' },
-            { category: 'poster', title: 'Thumbnail Tugas Drama Bahasa Indonesia', date: '20 May 2026', desc: 'Poster promosi digital pementasan mahakarya kelas XI RPL.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/thumbnail-tugas-drama-bahasa-indonesia-1779252592', thumb: '' },
-            { category: 'poster', title: 'Infografis Kearifan Lokal Canva', date: '03 Dec 2025', desc: 'Desain cetak edukasi infografis ragam kearifan lokal.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/infografis-kearifal-lokal-1764736765', thumb: '' },
-            { category: 'poster', title: 'Poster Sertijab Canva', date: '03 Dec 2025', desc: 'Publikasi informasi upacara serah terima jabatan organisasi.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/poster-sertijab-1764736630', thumb: '' },
-            { category: 'poster', title: 'Poster Lisamatong', date: '03 Dec 2025', desc: 'Media ajakan aksi gerakan kebersihan Lihat Sampah Masukkan Tong.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/poster-lisamatong-1764735146', thumb: '' },
-
-            // --- PDF DOKUMEN ---[cite: 1]
-            { category: 'dokumen', title: 'Saat Aku Memilihmu - Cerpen', date: '20 May 2026', desc: 'Karya sastra berupa cerpen fiksi naratif hasil tulisan kreatif.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/saat-aku-memilihmu-cerpen-1779257466', thumb: '' },
-            { category: 'dokumen', title: 'Visual Alchemy: Mengubah Piksel Menjadi Produk Bernilai Jual', date: '18 May 2026', desc: 'Panduan PDF modul bisnis konseptual seni aset piksel digital.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/visual-alchemy-mengubah-piksel-menjadi-produk-bernilai-jua-1779084719', thumb: '' },
-
-            // --- MOCKUP ---[cite: 1]
-            { category: 'mockup', title: 'Go - Click App', date: '03 Dec 2025', desc: 'Mockup prototipe antarmuka aplikasi ojek daring dan food delivery.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/go-click-1764734311', thumb: '' },
-            { category: 'mockup', title: 'Tiket Serulingmas Figma', date: '03 Dec 2025', desc: 'Desain purwarupa UI/UX tiket masuk tempat wisata via Figma.', link: 'https://karya.pplg.smkn1bawang.sch.id/karya/tiket-serulingmas-1764734019', thumb: '' }
+        // =========================================================================
+        // DATA KARYA / PORTOFOLIO kamu
+        // Untuk menambah karya baru, cukup copas salah satu objek di bawah, 
+        // lalu taruh di paling atas array.
+        // =========================================================================
+        const projects = [
+            {
+                category: "Website", 
+                title: "Website No Coding - Canva", 
+                date: "2026-05-30", 
+                desc: "Pembuatan website sederhana tanpa coding menggunakan Canva. Website ini menampilkan informasi dasar dan visual yang menarik untuk keperluan pribadi atau bisnis.",
+                link: "https://coffeshopz.my.canva.site/",
+                thumb: "img/website-no-coding-menggunakan-canva-6a535e87632d9.jpg"
+            },
+            {
+                category: "Fotografi", 
+                title: "Photografi Pantai Glagah Yogyakarta", 
+                date: "2026-05-25", 
+                desc: "Pembuatan karya fotografi dengan tema Pantai Glagah Yogyakarta. Karya ini menampilkan keindahan alam dan suasana pantai yang menenangkan.",
+                link: "https://drive.google.com/file/d/1ohY6DwYovokrmJUEqlaArQYRidhyDwpd/preview",
+                thumb: "img/photography-pantai-glagah-yogyakarta-6a5360f267436.jpg"
+            },
+            {
+                category: "Fotografi", 
+                title: "Photografi Pantai Menganti Kebumen", 
+                date: "2026-05-20", 
+                desc: "Pembuatan karya fotografi dengan tema Pantai Menganti Kebumen. Karya ini menampilkan keindahan alam dan suasana pantai yang menenangkan.",
+                link: "https://drive.google.com/file/d/1UN8X0XA8D35CWax_j0holBzRW-nPRblX/preview",
+                thumb: "img/photography-pantai-menganti-kebumen-6a535c8f018df.jpg"
+            },
+            {
+                category: "Fotografi", 
+                title: "Photografi Candi Borobudur", 
+                date: "2026-05-15", 
+                desc: "Pembuatan karya fotografi dengan tema Candi Borobudur. Karya ini menampilkan keindahan arsitektur dan sejarah dari salah satu situs warisan dunia.",
+                link: "https://drive.google.com/file/d/1Yp-BIwRlCidclPOAZ1Mw3DCZQ1uBW7kU/preview",
+                thumb: "img/photography-candi-borobudur-magelang-6a535bb8de982.jpg"
+            },
+            {
+                category: "Poster", 
+                title: "Desain Poster Produk - Canva", 
+                date: "2026-05-10", 
+                desc: "Pembuatan desain poster untuk promosi produk menggunakan Canva. Desain ini menampilkan visual yang menarik dan informatif untuk meningkatkan penjualan produk.",
+                link: "https://drive.google.com/file/d/1DW9DoqaUqAjXs1iCOptGiqSfG-ariimz/preview",
+                thumb: "img/poster-produk-canva-v1-6a51f3ccc68dc.jpg"
+            },
+            {
+                category: "Aplikasi", 
+                title: "Implemtasi Aplikasi TodoList - Flutter", 
+                date: "2026-05-01", 
+                desc: "Pembuatan aplikasi TodoList menggunakan Flutter. Aplikasi ini memungkinkan pengguna untuk membuat, mengedit, dan menghapus daftar tugas sehari-hari dengan antarmuka yang sederhana dan intuitif.",
+                link: "https://drive.google.com/file/d/1VKVHhJN9mWiZR5TSdn2YUWG222T6iLem/preview",
+                thumb: "img/implementasi-aplikasi-todolist-flutter-v1-6a30c3a271d7e.jpg"
+            },
+            {
+                category: "Mockup", 
+                title: "Desain Aplikasi Sederhana TodoList - Figma", 
+                date: "2026-04-25", 
+                desc: "Pembuatan desain mockup aplikasi sederhana TodoList menggunakan Figma. Desain ini menampilkan antarmuka yang intuitif dan user-friendly untuk membantu pengguna mengatur tugas sehari-hari.",
+                link: "figma.com/embed/interstitial?embed_host=share&embed_path=%2Fdesign%2FdJM1PTJzLIE3e7M3GtsTs3%2FTodo%3Fembed-host%3Dshare%26kind%3Dfile%26node-id%3D0-1%26page-selector%3D1%26theme%3Dlight%26version%3D2%26viewer%3D1&theme=light&version=2",
+                thumb: "img/desain-aplikasi-sederhana-todolist-figma-v1-6a30bf2e31304.jpg"
+            },
+            {
+                category: "Website", 
+                title: "Website Portfolio Hevyna Azalya Putri", 
+                date: "2026-04-20", 
+                desc: "Pembuatan website portofolio pribadi untuk menampilkan karya dan proyek yang telah diselesaikan. Website ini dirancang dengan desain responsif dan modern.",
+                link: "https://zallyya.github.io/HevynaAzalya-Portofolio/",
+                thumb: "img/website-portofolio-dengan-karya-v1-6a3098e5b14a7.jpg"
+            },
+            {
+                category: "Website", 
+                title: "Website Kartu Ucapan Ulang Tahun Romance", 
+                date: "2026-04-15", 
+                desc: "Pembuatan website kartu ucapan ulang tahun dengan tema romance. Website ini memungkinkan pengguna untuk mengirimkan ucapan ulang tahun secara digital dengan desain yang menarik.",
+                link: "https://zallyya.github.io/for-you/",
+                thumb: "img/website-kartu-ucapan-ulang-tahun-romance-6a2664124b8dc.jpg"
+            },
+            {
+                category: "Video", 
+                title: "Opening Video Drama Bahasa Indonesia - Capcut", 
+                date: "2026-04-10", 
+                desc: "Pembuatan opening video untuk drama bahasa Indonesia menggunakan Capcut. Video ini menampilkan visual yang menarik dan dinamis untuk memperkenalkan drama.",
+                link: "https://drive.google.com/file/d/1jeTK3KBw4C84kPOx96SH2IHmZEqXUNiw/preview",
+                thumb: "img/opening-video-drama-bahasa-indonesia-6a1a7a45e4b7d.jpg"
+            },
+            {
+                category: "3D", 
+                title: "3D Model Pose Among Us Menendang Bola - Blender", 
+                date: "2026-04-05", 
+                desc: "Pembuatan model 3D pose karakter Among Us menendang bola menggunakan Blender. Model ini dirancang untuk keperluan animasi dan visualisasi game.",
+                link: "https://drive.google.com/file/d/1-Ptz9JxlILs5pNt5FEIzfSLNU-uidBxG/preview",
+                thumb: "img/pose-among-us-3d-menendang-bola-6a1a797a36461.jpg"   
+            },
+            {
+                category: "3D", 
+                title: "3D Model Printer Foto Copy - Blender", 
+                date: "2026-04-01", 
+                desc: "Pembuatan model 3D printer foto copy menggunakan Blender. Model ini dirancang untuk keperluan visualisasi interior dan desain produk.",
+                link: "https://drive.google.com/file/d/1EGUbJ_ZiqW_x9u9qk2YCMcYOZUCX7EII/preview",
+                thumb: "img/model-printer-foto-copy-3d-19719-6a101386da35c.jpg"
+            },
+            {
+                category: "3D", 
+                title: "3D Model Meja Belajar Merah - Blender", 
+                date: "2026-03-25", 
+                desc: "Pembuatan model 3D meja belajar berwarna merah menggunakan Blender. Model ini dirancang untuk keperluan visualisasi interior dan desain produk.",
+                link: "https://drive.google.com/file/d/1UQoHSLOzAyIyqELQE13xzTaPDdQkayB2/preview",
+                thumb: "img/meja-belajar-panjang-merah-3d-19719-6a10033be9315.jpg"
+            },
+            {
+                category: "3D", 
+                title: "3D Model Karakter Among Us - Blender", 
+                date: "2026-03-20", 
+                desc: "Pembuatan model 3D karakter Among Us menggunakan Blender. Model ini dirancang untuk keperluan animasi dan visualisasi game.",
+                link: "https://drive.google.com/file/d/1yHqEPtbUoLojxmj_pmszBfYBk4yCuTjw/preview",   
+                thumb: "img/karakter-among-us-3d-v1-6a0ea6d6806ad.jpg"                                             
+            },
+            {
+                category: "3D", 
+                title: "3D Model Lampu Belajar - Blender", 
+                date: "2026-03-15", 
+                desc: "Pembuatan model 3D lampu belajar menggunakan Blender. Model ini dirancang untuk keperluan visualisasi interior dan desain produk.",
+                link: "https://drive.google.com/file/d/1dMKluzMDLNfuCgaFdGSygYG6zAEjzDEn/preview",
+                thumb: "img/3d-lampu-meja-untuk-belajar-6a0e97ffef612.jpg"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Logo Rumah Makan V2 - Canva", 
+                date: "2026-03-10", 
+                desc: "Pembuatan desain logo untuk rumah makan menggunakan Canva. Desain ini menampilkan identitas visual yang unik dan menarik.",
+                link: "https://drive.google.com/file/d/1vMWm_9A5B_ANhpyW8n2Q4JT0kr05aaL-/preview",
+                thumb: "img/19719_LOGO KULINER (1).png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Card Identitas Bahasa Jepang - Canva", 
+                date: "2026-03-05", 
+                desc: "Pembuatan desain card identitas untuk kursus bahasa Jepang menggunakan Canva. Desain ini menampilkan informasi penting secara visual dan menarik.",
+                link: "https://drive.google.com/file/d/1jZUrQ17JTARpBBvZQHXhGwaULtWfYY1O/preview",
+                thumb: "img/card-identitas-dalam-bahasa-jepang-6a0d53b7d4132.jpg"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Poster Ramadhan - Canva", 
+                date: "2026-03-01", 
+                desc: "Pembuatan desain poster untuk promosi acara Ramadhan menggunakan Canva. Desain ini menampilkan visual yang menarik dan informatif untuk meningkatkan partisipasi dalam acara.",
+                link: "https://drive.google.com/file/d/1AagrWQR_GX1lGnhyjeSNn9DPacnDrJ2v/preview",
+                thumb: "img/Cuplikan layar 2026-07-19 183714.png"
+            },
+            {
+                category: "PDF Dokumen", 
+                title: "Cerpen 'Saat Aku Memilihmu''", 
+                date: "2026-02-25", 
+                desc: "Pembuatan cerpen berjudul 'Saat Aku Memilihmu'. Cerpen ini menceritakan kisah inspiratif tentang pilihan dan perjalanan hidup, ditulis dengan gaya bahasa yang menarik.",
+                link: "https://drive.google.com/file/d/1HMhVk38i2Kf6BCV1W1Jl8aasfCICpaGq/preview",
+                thumb: "img/saat-aku-memilihmu-cerpen-6a0d507a3190b.jpg"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Thumblain Film Pendek - Canva", 
+                date: "2026-02-20", 
+                desc: "Pembuatan desain thumblain untuk film pendek menggunakan Canva. Desain ini menampilkan visual yang menarik untuk meningkatkan klik dan penonton film.",
+                link: "https://drive.google.com/file/d/1E5-bS5j3PmrKtIHxGvW7EExmI-8J-J7p/preview",
+                thumb: "img/Kelompok 3 (3).png"
+            },
+            {
+                category: "PDF Dokumen", 
+                title: "E-Book Visual Alchemy : Mengubah Piksel Menjadi Produk Bernilai Jual", 
+                date: "2026-02-15", 
+                desc: "Pembuatan e-book visua. E-book ini membahas tentang bagaimana mengubah piksel menjadi produk bernilai jual, memberikan panduan dan tips praktis bagi pembaca.",
+                link: "https://drive.google.com/file/d/12Sb7ajDfVyWE5LtytMBa9BtPMbDY53SU/preview",
+                thumb: "img/visual.png"
+            },
+            {
+                category: "Website", 
+                title: "Website Agregator Berita", 
+                date: "2026-02-10", 
+                desc: "Pembuatan website agregator berita. Website ini mengumpulkan berita dari berbagai sumber dan menampilkannya dalam satu platform yang mudah diakses.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/web-agregator-smk-negeri-1-bawang-19719-1778633866",
+                thumb: "img/web-agregator-smk-negeri-1-bawang-19719-6a03cc8a8499f.jpg"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Feed Instagram - Canva", 
+                date: "2026-02-05", 
+                desc: "Pembuatan desain feed Instagram menggunakan Canva untuk promosi produk digital. Desain ini menampilkan visual yang menarik dan informatif untuk meningkatkan engagement di platform media sosial.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/feed-instagram-1764740903",
+                thumb: "img/feed.png"
+            },
+            {
+                category: "3D", 
+                title: "3D Kursi, Meja dan Payung - Blender", 
+                date: "2026-01-30", 
+                desc: "Pembuatan model 3D kursi, meja, dan payung menggunakan Blender untuk keperluan desain interior dan visualisasi.",
+                link: "https://drive.google.com/file/d/1AaXpzEWt2ZQ0-3QaeCevlJ8AgpGmGR_s/preview",
+                thumb: "img/Kursi_19719.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Logo Rumah Makan 'Kitchmom' - Canva", 
+                date: "2026-01-25", 
+                desc: "Pembuatan desain logo untuk rumah makan 'Kitchmom' menggunakan Canva, menampilkan identitas visual yang unik dan menarik.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/logo-1764740903",
+                thumb: "img/kitch.png"
+            },
+            {
+                category: "PDF Dokumen", 
+                title: "Laporan Jurnal Visual - Canva ", 
+                date: "2026-01-20", 
+                desc: "Pembuatan laporan jurnal visual menggunakan Canva untuk keperluan akademik, menampilkan informasi secara visual dan menarik.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/junal-visual-1764738993",
+                thumb: "img/jurnal.png"
+            },
+            {
+                category: "Video", 
+                title: "Film Pendek 'Ramadhan Cahaya' - Filmora", 
+                date: "2025-12-31", 
+                desc: "Pembuatan film pendek bertema Ramadhan menggunakan Filmora, menampilkan cerita inspiratif dan visual yang menarik.",
+                link: "https://youtu.be/j0WJK4UXAi4?si=fm8P5iLoJVIBUvdu",
+                thumb: "img/film.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Infografis Dieng Banjarnegara - Canva", 
+                date: "2025-12-31", 
+                desc: "Pembuatan desain infografis menggunakan Canva untuk mempromosikan destinasi wisata Dieng Banjarnegara. Desain ini menampilkan informasi penting secara visual dan menarik.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/infografis-kearifal-lokal-1764736765",
+                thumb: "img/infografis.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Cover Sorotan Instagram - Canva", 
+                date: "2025-12-30", 
+                desc: "Pembuatan desain cover sorotan Instagram menggunakan Canva untuk mempercantik tampilan profil.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/cover-sorotan-instagran-1764736237",
+                thumb: "img/sorotan.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Poster Sertijab - Canva", 
+                date: "2025-12-28", 
+                desc: "Pembuatan desain poster untuk acara Sertijab menggunakan Canva, menampilkan informasi acara secara visual.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/poster-sertijab-1764736630",
+                thumb: "img/poster.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Feed Instagram V2 - Canva", 
+                date: "2025-12-25", 
+                desc: "Pembuatan desain feed instagram menggunakan Canva untuk promosi produk digital.  Desain ini menampilkan visual yang menarik dan informatif untuk meningkatkan engagement di platform media sosial.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/feed-instagram-1764735831",
+                thumb: "img/feed kader.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Id Card - Canva", 
+                date: "2025-12-22", 
+                desc: "Pembuatan desain Id Card menggunakan Canva untuk keperluan identifikasi dan branding.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/desain-id-card-1764735400",
+                thumb: "img/id.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Poster Lisamatong - Canva", 
+                date: "2025-12-20", 
+                desc: "Pembuatan desain poster untuk acara Lisamatong menggunakan Canva, menampilkan informasi acara secara visual.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/poster-lisamatong-1764735146",
+                thumb: "img/lisamatong.png"
+            },
+            {
+                category: "Web", 
+                title: "Website Cv Pribadi", 
+                date: "2025-12-18", 
+                desc: "Pembuatan website CV pribadi untuk menampilkan profil, pengalaman, dan portofolio secara online.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/portofolio-1764734968",
+                thumb: "img/cv.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Banner Digital - Canva", 
+                date: "2025-12-15", 
+                desc: "Pembuatan desain banner digital menggunakan Canva untuk promosi acara online.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/banner-digital-1764734558",
+                thumb: "img/benner.png"
+            },
+            {
+                category: "Mockup", 
+                title: "Desain Website Go-Click - Figma", 
+                date: "2025-12-12", 
+                desc: "Pembuatan mockup desain website Go-Click menggunakan Figma untuk keperluan presentasi proyek.",
+                link: "https://www.figma.com/design/aYLa8lPBciyuAuOxLKjLE9/Aplikasi-Go-click?node-id=0-1&t=nLZOewwsE1oSUCzf-1",
+                thumb: "img/go click.png"
+            },
+            {
+                category: "Mockup", 
+                title: "Desain Website Pemesanan Tiket Masuk Serulingmas - Figma", 
+                date: "2025-12-10", 
+                desc: "Pembuatan mockup desain website untuk pemesanan tiket masuk Serulingmas menggunakan Figma.",
+                link: "https://www.figma.com/design/2CQsUOS59DLMRGDxM6hRsC/PSAS_Hevyna-Azalya-Putri?node-id=8-3&t=yrxtH4jHUscfJ4nb-1",
+                thumb: "img/figma seruling.png"
+            },
+            {
+                category: "Grafis", 
+                title: "Desain Cover Jurnal - Canva", 
+                date: "2025-12-08", 
+                desc: "Pembuatan desain cover jurnal menggunakan Canva untuk keperluan akademik.",
+                link: "https://karya.pplg.smkn1bawang.sch.id/karya/cover-jurnal-1764732025",
+                thumb: "img/jurnal.png"
+            },
+            {
+                category: "Web", 
+                title: "Website BK SMKN 1 Bawang", 
+                date: "2025-12-05", 
+                desc: "Pembuatan website untuk layanan Bimbingan Konseling di SMKN 1 Bawang, menyediakan informasi dan layanan online.",
+                link: "https://konselingbk.hevynaazalya.my.id/",
+                thumb: "img/bk.png"
+            },
+            {
+                category: "Web", 
+                title: "Website Toko Ayyaaww", 
+                date: "2025-12-03", 
+                desc: "Pembuatan website toko online untuk Ayyaaww, menampilkan produk dan fitur belanja online.",
+                link: "https://toko.hevynaazalya.my.id/",
+                thumb: "img/toko.png"
+            },
+            { 
+              category: "Grafis", 
+              title: "Feed Instagram - Canva", 
+              date: "2025-12-01", 
+              desc: "Pembuatan feed Instagram menggunakan Canva untuk promosi produk digital.", 
+              link: "https://karya.pplg.smkn1bawang.sch.id/karya/feed-instagram-1764730948", // Jika tidak ada link, ubah menjadi: link: "",
+              thumb: "img/feed.png" // Arahkan ke folder img kamu
+            },
+            
+            
+            
+            
+            
+            
+            // ... kamu tinggal potong dan teruskan daftar karya lainnya di sini ...
         ];
 
-        // Menyinkronkan data agar perubahan thumbnail tidak hilang saat di-refresh
-        let projects = JSON.parse(localStorage.getItem('myProjects'));
-        if (!projects || projects.length === 0) {
-            projects = defaultProjects;
-            localStorage.setItem('myProjects', JSON.stringify(projects));
-        }
-
-        let isAdminMode = false;
-        let clickCount = 0;
-        let targetIndexForThumb = null;
-
-        // Cek Ketukan Rahasia untuk Mode Admin
-        function checkAdminClick() {
-            clickCount++;
-            if (clickCount >= 3) {
-                let password = prompt("Masukkan Kata Sandi Admin:");
-                if (password === "admin123") {
-                    isAdminMode = true;
-                    document.getElementById('admin-panel').style.display = 'block';
-                    
-                    // Memunculkan tombol kelola di setiap item proyek
-                    document.querySelectorAll('.admin-actions').forEach(el => el.style.setProperty('display', 'flex', 'important'));
-                    
-                    document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
-                    alert("Mode Manajemen Admin Aktif!");
-                } else {
-                    alert("Akses ditolak!");
-                }
-                clickCount = 0;
-            }
-        }
-
-        function switchForm(num) {
-            document.querySelectorAll('.input-form').forEach(f => f.classList.remove('active'));
-            document.querySelectorAll('.form-toggle-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`form${num}`).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Render Menampilkan Grid Proyek
-        function displayProjects() {
-            const grid = document.getElementById('portfolio-display');
+        // =========================================================================
+        // LOGIKA RENDER (Jangan diubah kecuali diperlukan)
+        // =========================================================================
+        
+        function renderPublicGrid(data) {
+            const grid = document.getElementById('portfolio-grid');
             grid.innerHTML = '';
-            
-            projects.forEach((proj, index) => {
-                const thumb = proj.thumb || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600';
-                let actionBtn = proj.link ? `<a href="${proj.link}" target="_blank" class="item-link">Lihat Karya</a>` : `<span class="item-link" style="background:#e2e8f0; color:#a0aec0;">Internal Project</span>`;
+            data.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm flex flex-col hover:shadow-md transition duration-300";
                 
-                let adminStyle = isAdminMode ? 'style="display:flex !important;"' : '';
-
-                grid.innerHTML += `
-                    <div class="portfolio-item ${proj.category}">
-                        <div class="admin-actions" ${adminStyle}>
-                            <button class="admin-action-btn" onclick="triggerThumbChange(${index})">Ganti Gambar</button>
-                            <button class="admin-action-btn delete" onclick="deleteProject(${index})">Hapus</button>
+                // Cek apakah proyek memiliki link atau tidak
+                const actionBtn = p.link ? 
+                    `<a href="${p.link}" target="_blank" class="mt-auto inline-block text-center w-full bg-slate-900 text-white text-xs font-medium py-2 px-4 rounded hover:bg-blue-900 transition">Lihat Karya</a>` :
+                    `<span class="mt-auto inline-block text-center w-full bg-slate-100 text-slate-400 text-xs font-medium py-2 px-4 rounded">Dokumen Internal / Tanpa Link</span>`;
+                
+                card.innerHTML = `
+                    <img src="${p.thumb}" alt="${p.title}" class="w-full h-48 object-cover border-b border-slate-100" onerror="this.src='https://via.placeholder.com/400x250?text=Gambar+Belum+Ada'">
+                    <div class="p-5 flex flex-col flex-grow">
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="bg-blue-50 text-blue-900 text-xs px-2.5 py-0.5 rounded-full font-semibold border border-blue-100">${p.category}</span>
+                            <span class="text-xs text-slate-400">${p.date}</span>
                         </div>
-                        <div class="thumbnail-container"><img src="${thumb}" alt="thumbnail"></div>
-                        <div class="item-content">
-                            <div class="item-category">${proj.category}</div>
-                            <div class="item-title">${proj.title}</div>
-                            <div class="item-date">${proj.date}</div>
-                            <div class="item-desc">${proj.desc}</div>
-                            ${actionBtn}
-                        </div>
-                    </div>`;
+                        <h3 class="text-base font-bold text-slate-900 mb-2 line-clamp-2">${p.title}</h3>
+                        <p class="text-xs text-slate-600 line-clamp-3 mb-4 flex-grow">${p.desc}</p>
+                        ${actionBtn}
+                    </div>
+                `;
+                grid.appendChild(card);
             });
         }
 
-        // Trigger Input File Rahasia untuk Mengubah Gambar
-        function triggerThumbChange(index) {
-            targetIndexForThumb = index;
-            document.getElementById('global-thumb-loader').click();
-        }
-
-        // Event Listener khusus memproses file gambar thumbnail yang baru dipilih
-        document.getElementById('global-thumb-loader').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file && targetIndexForThumb !== null) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Update data base64 gambar langsung ke item array
-                    projects[targetIndexForThumb].thumb = e.target.result;
-                    localStorage.setItem('myProjects', JSON.stringify(projects));
-                    displayProjects();
-                    alert('Thumbnail untuk proyek ini berhasil diganti!');
+        function renderFilters() {
+            const categories = ['All', ...new Set(projects.map(p => p.category))];
+            const filterContainer = document.getElementById('category-filters');
+            filterContainer.innerHTML = '';
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `filter-btn px-4 py-2 text-sm font-medium rounded-md border border-slate-300 bg-white hover:bg-slate-100 transition ${cat === 'All' ? 'active' : ''}`;
+                btn.innerText = cat === 'All' ? 'Semua Karya' : cat;
+                btn.onclick = () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderPublicGrid(cat === 'All' ? projects : projects.filter(p => p.category === cat));
                 };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Hapus Proyek
-        function deleteProject(index) {
-            if(confirm("Apakah Anda yakin ingin menghapus proyek ini?")) {
-                projects.splice(index, 1);
-                localStorage.setItem('myProjects', JSON.stringify(projects));
-                displayProjects();
-            }
+                filterContainer.appendChild(btn);
+            });
         }
 
-        // Simpan Proyek Baru
-        function handleFormSubmit(event, type) {
-            event.preventDefault();
-            const form = document.getElementById(`form${type}`);
-            const fileInput = form.querySelector('.prod-thumb');
-
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const newProj = {
-                        category: form.querySelector('.prod-category').value,
-                        title: form.querySelector('.prod-title').value,
-                        date: form.querySelector('.prod-date').value,
-                        desc: form.querySelector('.prod-desc').value,
-                        link: type === 1 ? form.querySelector('.prod-link').value : '',
-                        thumb: e.target.result
-                    };
-                    projects.push(newProj);
-                    localStorage.setItem('myProjects', JSON.stringify(projects));
-                    form.reset();
-                    displayProjects();
-                    filterSelection('all');
-                    alert('Sukses! Karya baru berhasil ditambahkan.');
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            }
-        }
-
-        function filterSelection(c) {
-            let x = document.getElementsByClassName("portfolio-item");
-            if (c == "all") c = "";
-            for (let i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-                if (x[i].className.indexOf(c) > -1) x[i].style.display = "flex";
-            }
-        }
-
-        // Inisialisasi awal
-        displayProjects();
-        filterSelection('all');
+        // Jalankan fungsi saat pertama kali web dibuka
+        renderPublicGrid(projects);
+        renderFilters();
     </script>
 </body>
 </html>
